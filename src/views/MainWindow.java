@@ -16,6 +16,7 @@ public class MainWindow extends JFrame {
 	private PanelInfo panelTerminals;
 	private PanelInfo panelNoTerminals;
 	private PanelInfoProductions panelProductions;
+	private PanelDraw panelDraw;
 
 	public MainWindow(Controller controller) {
 		initWindow(controller);
@@ -49,6 +50,7 @@ public class MainWindow extends JFrame {
 
 	private void initLayout(Controller controller) {
 		JPanel p = new JPanel(new GridLayout(1, 3));
+		panelDraw = new PanelDraw();
 		panelTerminals = new PanelInfo("Terminales", "a,b,c", controller);
 		panelTerminals.setButtoname("1");
 		panelNoTerminals = new PanelInfo("No Terminales", "S, A, T", controller);
@@ -61,6 +63,7 @@ public class MainWindow extends JFrame {
 		p.add(panelNoTerminals);
 		p.add(panelProductions);
 		add(p, BorderLayout.NORTH);
+		add(panelDraw, BorderLayout.CENTER);
 	}
 
 	private void initFrame() {
