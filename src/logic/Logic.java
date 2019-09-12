@@ -10,13 +10,15 @@ public class Logic {
 	
 	public void initTerminals(String[] terminals) {
 		for (int i = 0; i < terminals.length; i++) {
-			terminals[i] = terminals[i].toUpperCase();
+			terminals[i] = terminals[i].toLowerCase();
+			System.out.println(terminals[i]);
 		}
 	}
 	
 	public void initNoTerminals(String[] noTerminals) {
 		for (String i : noTerminals) {
-			i = i.toLowerCase();
+			i = i.toUpperCase();
+			System.out.println(i);
 		}
 	}
 

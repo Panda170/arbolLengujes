@@ -31,6 +31,11 @@ public class Controller implements ActionListener, KeyListener {
 		switch (MyActions.valueOf(e.getActionCommand())) {
 		case DISABLE:
 			mainWindow.disablePanel(button.getName());
+			if (button.getName().equals(MyActions.TERMINAL_CODE.getCommand())) {
+				logic.initTerminals(mainWindow.getTextInfo(MyActions.TERMINAL_CODE.getCommand()));
+			}else {
+				logic.initNoTerminals(mainWindow.getTextInfo(MyActions.NO_TERMINAL_CODE.getCommand()));
+			}
 			break;
 
 		default:

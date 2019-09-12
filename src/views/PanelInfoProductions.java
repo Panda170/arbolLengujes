@@ -3,10 +3,10 @@ package views;
 import controller.Controller;
 
 @SuppressWarnings("serial")
-public class PanelInfoProductions extends PanelInfo{
+public class PanelInfoProductions extends PanelHeader{
 
-	public PanelInfoProductions(String titleT, String placeHolder, Controller controller) {
-		super(titleT, placeHolder, controller);
+	public PanelInfoProductions(String titleT, Controller controller) {
+		super(titleT);
 		
 	}
 

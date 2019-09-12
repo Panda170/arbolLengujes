@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import controller.Controller;
+import entity.MyActions;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
@@ -21,13 +22,23 @@ public class MainWindow extends JFrame {
 	}
 	
 	public void disablePanel(String name) {
-		if (name.equals("1")) {
+		if (name.equals(MyActions.TERMINAL_CODE.getCommand())) {
 			panelTerminals.disablePanel();
 			panelTerminals.setEnabled(false);
 		}else {
 			panelNoTerminals.disablePanel();
 			panelNoTerminals.setEnabled(false);
 		}
+	}
+	
+	public String[] getTextInfo(String name) {
+		String[] chain;
+		if (name.equals(MyActions.TERMINAL_CODE.getCommand())) {
+			chain = panelTerminals.getTextInfo().split(MyActions.SEPARATOR_TERMINAL.getCommand());
+		}else {
+			chain = panelNoTerminals.getTextInfo().split(MyActions.SEPARATOR_TERMINAL.getCommand());
+		}
+		return chain;
 	}
 
 	private void initWindow(Controller controller) {
@@ -42,7 +53,7 @@ public class MainWindow extends JFrame {
 		panelTerminals.setButtoname("1");
 		panelNoTerminals = new PanelInfo("No Terminales", "S, A, T", controller);
 		panelNoTerminals.setButtoname("2");
-		panelProductions = new PanelInfoProductions("Producciones", "E = []", controller);
+		panelProductions = new PanelInfoProductions("Producciones", controller);
 		p.setSize(this.getWidth(), (int) (this.getHeight() * 0.15f));
 		p.setPreferredSize(p.getSize());
 		p.setBackground(Color.RED);
