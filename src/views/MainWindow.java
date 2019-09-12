@@ -8,27 +8,47 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controller.Controller;
+
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
+	private PanelInfo panelTerminals;
+	private PanelInfo panelNoTerminals;
+	private PanelInfoProductions panelProductions;
 
-	public MainWindow() {
-		initWindow();
+	public MainWindow(Controller controller) {
+		initWindow(controller);
+	}
+	
+	public void disablePanel(String name) {
+		if (name.equals("1")) {
+			panelTerminals.disablePanel();
+			panelTerminals.setEnabled(false);
+		}else {
+			panelNoTerminals.disablePanel();
+			panelNoTerminals.setEnabled(false);
+		}
 	}
 
-	private void initWindow() {
+	private void initWindow(Controller controller) {
 		initFrame();
-		initLayout();
+		initLayout(controller);
 		setVisible(true);
 	}
 
-	private void initLayout() {
+	private void initLayout(Controller controller) {
 		JPanel p = new JPanel(new GridLayout(1, 3));
-
+		panelTerminals = new PanelInfo("Terminales", "a,b,c", controller);
+		panelTerminals.setButtoname("1");
+		panelNoTerminals = new PanelInfo("No Terminales", "S, A, T", controller);
+		panelNoTerminals.setButtoname("2");
+		panelProductions = new PanelInfoProductions("Producciones", "E = []", controller);
 		p.setSize(this.getWidth(), (int) (this.getHeight() * 0.15f));
 		p.setPreferredSize(p.getSize());
 		p.setBackground(Color.RED);
-		p.add(new PanelInfo("Terminales", "a,b,c"));
-		p.add(new PanelInfo("No Terminales", "S, A, T"));
+		p.add(panelTerminals);
+		p.add(panelNoTerminals);
+		p.add(panelProductions);
 		add(p, BorderLayout.NORTH);
 	}
 
