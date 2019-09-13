@@ -35,6 +35,8 @@ public class Controller implements ActionListener, KeyListener {
 				logic.initTerminals(mainWindow.getTextInfo(MyActions.TERMINAL_CODE.getCommand()));
 			}else {
 				logic.initNoTerminals(mainWindow.getTextInfo(MyActions.NO_TERMINAL_CODE.getCommand()));
+			}
+			if (logic.canInitProductions()) {
 				mainWindow.initPanel(logic.getNoTerminals());
 			}
 			break;

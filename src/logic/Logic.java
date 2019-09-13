@@ -5,7 +5,8 @@ public class Logic {
 	private String[] noTerminals;
 	
 	public Logic() {
-		
+		terminals = new String[0];
+		noTerminals = new String[0];
 	}
 	
 	public void initTerminals(String[] terminals) {
@@ -20,6 +21,10 @@ public class Logic {
 			noTerminals[i] = noTerminals[i].toUpperCase();
 		}
 		this.noTerminals = noTerminals;
+	}
+	
+	public boolean canInitProductions() {
+		return (terminals.length > 0 && noTerminals.length > 0);
 	}
 	
 	
