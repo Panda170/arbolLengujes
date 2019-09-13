@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import controller.Controller;
 import entity.MyActions;
@@ -61,9 +62,13 @@ public class MainWindow extends JFrame {
 		p.setBackground(Color.RED);
 		p.add(panelTerminals);
 		p.add(panelNoTerminals);
-		p.add(panelProductions);
+		p.add(new JScrollPane(panelProductions));
 		add(p, BorderLayout.NORTH);
 		add(panelDraw, BorderLayout.CENTER);
+	}
+	
+	public void initPanel(String[] noTerminalsList) {
+		panelProductions.initPanel(noTerminalsList);
 	}
 
 	private void initFrame() {

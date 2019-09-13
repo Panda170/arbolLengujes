@@ -12,12 +12,14 @@ public class Logic {
 		for (int i = 0; i < terminals.length; i++) {
 			terminals[i] = terminals[i].toLowerCase();
 		}
+		this.terminals = terminals;
 	}
 	
 	public void initNoTerminals(String[] noTerminals) {
-		for (String i : noTerminals) {
-			i = i.toUpperCase();
+		for (int i = 0; i < noTerminals.length; i++) {
+			noTerminals[i] = noTerminals[i].toUpperCase();
 		}
+		this.noTerminals = noTerminals;
 	}
 	
 	
