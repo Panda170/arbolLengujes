@@ -5,17 +5,23 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 import controller.Controller;
 import entity.MyActions;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
+	
 	private PanelInfo panelTerminals;
 	private PanelInfo panelNoTerminals;
+	private PanelInfoCreate infoCreate;
 	private PanelInfoProductions panelProductions;
 	private PanelDraw panelDraw;
 
@@ -29,6 +35,15 @@ public class MainWindow extends JFrame {
 			panelTerminals.setEnabled(false);
 		}else {
 			panelNoTerminals.disablePanel();
+			panelNoTerminals.setEnabled(false);
+		}
+	}
+	public void enablePanel(String name) {
+		if (name.equals(MyActions.TERMINAL_CODE.getCommand())) {
+			panelTerminals.enablePanel();
+			panelTerminals.setEnabled(false);
+		}else {
+			panelNoTerminals.enablePanel();
 			panelNoTerminals.setEnabled(false);
 		}
 	}
@@ -49,14 +64,27 @@ public class MainWindow extends JFrame {
 		setVisible(true);
 	}
 
+	public void setDatasInfoTerminal(String[] terminales) {
+		infoCreate.addDataTerminal(terminales);
+	}
+	public void setDatasInfoNoTerminal(String[] noTerminales) {
+		infoCreate.addDataNoTerminal(noTerminales);
+	}
+	public void setDatasInfoProducciones(String[] producciones) {
+		infoCreate.addDataProduccion(producciones);
+	}
+	
 	private void initLayout(Controller controller) {
 		JPanel p = new JPanel(new GridLayout(1, 3));
 		panelDraw = new PanelDraw();
-		panelTerminals = new PanelInfo("Terminales", "a,b,c", controller);
+		panelTerminals = new PanelInfo("Terminales", "a - b - c", controller);
 		panelTerminals.setButtoname("1");
-		panelNoTerminals = new PanelInfo("No Terminales", "S, A, T", controller);
+		panelNoTerminals = new PanelInfo("No Terminales", "S - A - T", controller);
 		panelNoTerminals.setButtoname("2");
 		panelProductions = new PanelInfoProductions("Producciones", controller);
+		infoCreate = new PanelInfoCreate();
+
+		add(infoCreate, BorderLayout.SOUTH);
 		p.setSize(this.getWidth(), (int) (this.getHeight() * 0.15f));
 		p.setPreferredSize(p.getSize());
 		p.setBackground(Color.RED);
@@ -65,6 +93,7 @@ public class MainWindow extends JFrame {
 		p.add(new JScrollPane(panelProductions));
 		add(p, BorderLayout.NORTH);
 		add(panelDraw, BorderLayout.CENTER);
+		
 	}
 	
 	public void initPanel(String[] noTerminalsList) {
@@ -80,5 +109,17 @@ public class MainWindow extends JFrame {
 		setSize(screenWidth, screenHeight);
 		setLocationRelativeTo(null);
 
+	}
+	
+	public String[] getList(){
+		String[] data = new String[panelProductions.getList().size()];
+		for (int i = 0; i < panelProductions.getList().size(); i++) {
+			data[i] = panelProductions.getList().get(i).getText();
+		}
+		return data;
+	}
+
+	public static void showMessage(String string) {
+		JOptionPane.showMessageDialog(null, string);
 	}
 }

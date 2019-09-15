@@ -29,6 +29,13 @@ public class PanelInfo extends PanelHeader {
 			i.setEnabled(false);
 		}
 	}
+	
+	public void enablePanel() {
+		panelIsActive = true;
+		for (Component i : getComponents()) {
+			i.setEnabled(true);
+		}
+	}
 	public void setButtoname(String name) {
 		nextJB.setName(name);
 	}
@@ -48,6 +55,7 @@ public class PanelInfo extends PanelHeader {
 						g.drawString(placeHolder, 5, 15);
 						nextJB.setEnabled(false);
 					} else {
+						info.setEnabled(true);
 						nextJB.setEnabled(true);
 					}
 				}
@@ -61,5 +69,4 @@ public class PanelInfo extends PanelHeader {
 		add(nextJB);
 
 	}
-
 }
