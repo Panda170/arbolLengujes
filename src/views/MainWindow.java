@@ -76,7 +76,7 @@ public class MainWindow extends JFrame {
 	
 	private void initLayout(Controller controller) {
 		JPanel p = new JPanel(new GridLayout(1, 3));
-		panelDraw = new PanelDraw();
+		panelDraw = new PanelDraw(controller);
 		panelTerminals = new PanelInfo("Terminales", "a - b - c", controller);
 		panelTerminals.setButtoname("1");
 		panelNoTerminals = new PanelInfo("No Terminales", "S - A - T", controller);
@@ -112,14 +112,14 @@ public class MainWindow extends JFrame {
 	}
 	
 	public String[] getList(){
-		String[] data = new String[panelProductions.getList().size()];
-		for (int i = 0; i < panelProductions.getList().size(); i++) {
-			data[i] = panelProductions.getList().get(i).getText();
-		}
-		return data;
+		return panelProductions.getList();
 	}
 
 	public static void showMessage(String string) {
 		JOptionPane.showMessageDialog(null, string);
+	}
+
+	public String getWord() {
+		return panelDraw.getWord();
 	}
 }

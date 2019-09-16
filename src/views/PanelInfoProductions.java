@@ -4,12 +4,14 @@ import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
 import controller.Controller;
 import entity.MyActions;
@@ -42,8 +44,8 @@ public class PanelInfoProductions extends PanelHeader {
 				
 				@Override
 				public void keyReleased(KeyEvent e) {
-					if (e.getKeyCode() != 8 && e.getKeyCode() != 16 && e.getKeyCode() != 17 && e.getKeyCode() != 20 && e.getKeyCode() !=18) {
-						((JTextField) e.getSource()).setText(((JTextField) e.getSource()).getText() + "|");
+					if (e.getKeyCode() == 32) {
+						((JTextField) e.getSource()).setText((((JTextField) e.getSource()).getText()).substring(0, ((JTextField) e.getSource()).getText().length()-1) + "|");
 					}
 				}
 				
@@ -54,12 +56,17 @@ public class PanelInfoProductions extends PanelHeader {
 				}
 			});
 			tf.setName(noTerminalsList[i] + "_tf");
-			p.add(new JLabel(noTerminalsList[i]));
+			if (i == 0) {
+				p.add(new JLabel("-->" + noTerminalsList[i]));	
+			}else {
+				p.add(new JLabel(noTerminalsList[i]));
+			}
 			p.add(tf);
 			myTextFields.add(tf);
 			p.setName(noTerminalsList[i] + "_panel");
 			add(p);
 		}
+		
 		JButton btIniciar = new JButton("Comenzar");
 		btIniciar.addActionListener(controller);
 		btIniciar.setActionCommand(MyActions.START.toString());
@@ -67,7 +74,11 @@ public class PanelInfoProductions extends PanelHeader {
 		revalidate();
 	}
 
-	public ArrayList<JTextField> getList(){
-		return myTextFields;
+	public String[] getList(){
+		String[] out = new String[myTextFields.size()];
+		for (int i = 0; i < myTextFields.size(); i++) {
+			out[i] = myTextFields.get(i).getText();
+		}
+		return out;
 	}
 }

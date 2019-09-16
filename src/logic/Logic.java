@@ -6,11 +6,20 @@ public class Logic {
 	private String[] terminals;
 	private String[] noTerminals;
 	
+	/**
+	 * Clase encargada de comprobar los simbolos terminales y no terminales de la gramatica
+	 */
+	
 	public Logic() {
 		terminals = new String[0];
 		noTerminals = new String[0];
 	}
 	
+	
+	/**
+	 * Inicializacion de los simbolos Terminales
+	 * @param terminals
+	 */
 	public void initTerminals(String[] terminals) {
 		if (noRepeat(terminals)) {
 			for (int i = 0; i < terminals.length; i++) {
@@ -23,6 +32,10 @@ public class Logic {
 		
 	}
 	
+	/**
+	 * Inicializacion de los simbolos no terminales
+	 * @param noTerminals
+	 */
 	public void initNoTerminals(String[] noTerminals) {
 		if (isDiferent(noTerminals) && noRepeat(noTerminals)) {
 			for (int i = 0; i < noTerminals.length; i++) {
@@ -34,6 +47,11 @@ public class Logic {
 		}
 	}
 	
+	/**
+	 * Verifica que no existan simbolos terminales y no terminales iguales
+	 * @param noTerminals2
+	 * @return
+	 */
 	public boolean isDiferent(String[] noTerminals2) {
 		for (int i = 0; i < terminals.length; i++) {
 			for (int j = 0; j < noTerminals2.length; j++) {
@@ -45,6 +63,11 @@ public class Logic {
 		return true;
 	}
 	
+	/**
+	 * Verifica que no se repita ningun simbolo
+	 * @param list
+	 * @return
+	 */
 	public boolean noRepeat(String[] list) {
 		for (int i = 0; i < list.length; i++) {
 			for (int j = i+1; j < list.length; j++) {

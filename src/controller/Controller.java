@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import entity.MyActions;
+import logic.Calculate;
 import logic.Logic;
 import logic.Produccion;
 import views.MainWindow;
@@ -18,11 +19,13 @@ public class Controller implements ActionListener, KeyListener {
 	
 	private Logic logic;
 	private MainWindow mainWindow;
-	private Produccion produccion; 
+	private Produccion produccion;
+	private Calculate calculate;
 	
 	public Controller() {
 		logic = new Logic();
 		produccion = new Produccion();
+		calculate = new Calculate();
 		initMainWindows();
 	}
 
@@ -35,6 +38,9 @@ public class Controller implements ActionListener, KeyListener {
 		JButton button = (JButton) e.getSource();
 		switch (MyActions.valueOf(e.getActionCommand())) {
 		case DISABLE:
+			/**
+			 * Configuracion de la gramatica
+			 */
 			mainWindow.disablePanel(button.getName());
 			if (button.getName().equals(MyActions.TERMINAL_CODE.getCommand())) {
 				logic.initTerminals(mainWindow.getTextInfo(MyActions.TERMINAL_CODE.getCommand()));
@@ -50,8 +56,17 @@ public class Controller implements ActionListener, KeyListener {
 			}
 			break;
 		case START:
+			/**
+			 * Inicio de la gramatica para poder buscar la palabra
+			 */
 			produccion.initProduccion(logic.getNoTerminals(), mainWindow.getList(), logic.getTerminals());
 			mainWindow.setDatasInfoProducciones(produccion.getProducciones());
+			break;
+		case BUSCAR:
+			/**
+			 * Busqueda de la palabra
+			 */
+			calculate.exist(produccion.getProduccionMatriz(), mainWindow.getWord());
 			break;
 		default:
 			break;
